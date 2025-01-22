@@ -1,0 +1,21 @@
+
+<h2>Connectez-vous</h2>
+
+<div *ngIf="errorMessage != ''">
+    <strong>Erreur!</strong> {{ errorMessage}}
+</div>
+
+<form [formGroup]="loginUserForm" (submit)="submitForm()">
+    <div>
+        <label for="login">Login</label>
+        <input formControlName="loginControl" type="text" id="login" name="login" placeholder="Entrez le login du compte" required>
+        <small style="color: red;">{{ getErrors('loginControl') }}</small>
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input formControlName="passwordControl" type="password" id="password" name="password" placeholder="Entrez le mot de passe du compte" required>
+        <small style="color: red;">{{ getErrors('passwordControl') }}</small>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Valider</button>
+</form>

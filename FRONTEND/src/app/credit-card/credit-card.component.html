@@ -1,0 +1,36 @@
+<p> Ajouter une carte </p>
+<app-form-card></app-form-card>
+<p> Liste des cartes </p>
+<li *ngFor="let item of cards ">
+    <div *ngIf="editId !== item.id" class="item-view">
+        Nom : {{ item.name }} <br>
+        Code : {{ item.code }} <br>
+        CCV : {{ item.ccv }} <br>
+        Date : {{ item.date }} <br>
+        <button (click)="removeCard(item.id)" style="color: red;">X</button>
+        <button (click)="editCard(item)">Modifier</button>
+      </div>
+  
+      <!-- Mode édition -->
+      <div *ngIf="editId === item.id" class="item-edit">
+        <form action="" method="get" class="compte" [formGroup]="update">
+            <div class="compte">
+                Nom : <input id="nameUpdate" type="text" name="nameUpdate" formControlName="nameUpdate" />
+            </div>
+            <div class="compte">
+                Code : <input id="codeUpdate" type="text" name="codeUpdate" formControlName="codeUpdate" placeholder="0000 0000 0000 0000" (keypress)="restrict_inputchar($event)"/>
+            </div>
+            <div class="compte">
+                CCV : <input id="ccvUpdate" type="number" name="ccvUpdate" formControlName="ccvUpdate" />
+            </div>
+            <div class="compte">
+                Date : <input id="dateUpdate" type="text" name="dateUpdate" formControlName="dateUpdate" (keypress)="restrict_inputchar($event)" placeholder="mm/yy"/>
+            </div>
+            <div class="compte">
+                <input type="submit" (click)="saveEdit(item.id)" value="Enregistrer" />
+            </div>
+        </form>
+        <button (click)="cancelEdit()">Annuler</button>
+      </div>
+    
+</li>

@@ -1,0 +1,10 @@
+<form>
+    <label>Recherche général : </label>
+    <input id="searchInput" #searchInput (input)="searchNom.value = ''; searchType.value = ''; searchPrice.value = ''; updateAll(searchInput.value)" placeholder="Chercher">
+    <br>
+    <label>Recherche par catégorie précise : </label>
+    <br>
+    <input id="searchNom" #searchNom (input)="searchInput.value = ''; updateIndividual(searchNom.value, searchType.value, +searchPrice.value)" placeholder="nom">
+    <input id="searchType" #searchType (input)="searchInput.value = ''; updateIndividual(searchNom.value, searchType.value, +searchPrice.value)" placeholder="type">
+    <input id="searchPrice" #searchPrice (input)="searchInput.value = ''; updateIndividual(searchNom.value, searchType.value, +searchPrice.value)" placeholder="prix >=">
+</form>

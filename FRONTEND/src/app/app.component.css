@@ -1,0 +1,13 @@
+.content.sidebar-open {
+    margin-left: 250px;
+}
+
+.content-main{
+    display: flex;
+    margin-top: 5vh;
+    height: 92vh;
+}
+
+body{
+    margin: 0 !important;
+}

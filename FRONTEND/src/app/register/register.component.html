@@ -1,0 +1,44 @@
+<div>
+    <h2>Register</h2>
+    <div>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div>
+            <label for="firstname"><strong>Prénom </strong></label>
+            <input id="firstname" formControlName="firstnameControl" />
+            <small>{{ getErrors('firstnameControl') }}</small>
+        </div>
+
+        <div>
+            <label for="lastname"><strong>Nom de famille </strong></label>
+            <input id="lastname" formControlName="lastnameControl" />
+            <small>{{ getErrors('lastnameControl') }}</small>
+        </div>
+
+        <div >
+            <label for="email"><strong>Adresse mail </strong></label>
+            <input id="email" formControlName="emailControl" />
+            <small>{{ getErrors('emailControl') }}</small>
+        </div>
+
+        <div >
+            <label for="login"><strong>Login </strong></label>
+            <input id="login" formControlName="loginControl" />
+            <small>{{ getErrors('loginControl') }}</small>
+        </div>
+
+        <div >
+            <label for="password"><strong>Mot de passe </strong></label>
+            <input id="password" formControlName="passwordControl"  type="password"/>
+            <small>{{ getErrors('passwordControl') }}</small>
+        </div>
+
+        <div >
+            <label for="confirmPassword"><strong>Confirmer le mot de passe </strong></label>
+            <input id="confirmPassword" formControlName="confirmPasswordControl"  type="password"/>
+            <small>{{ getErrors('confirmPasswordControl') }}</small>
+        </div>
+        <button type="submit">Sauvegarder</button>
+        </form>
+    </div>
+</div>
+  

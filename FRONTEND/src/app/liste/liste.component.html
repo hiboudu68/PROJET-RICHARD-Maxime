@@ -1,0 +1,10 @@
+<div id="searchProduct">
+    <app-search></app-search>
+</div>
+<h3> Liste des produits :</h3>
+<p *ngFor="let item of produits | async">
+    {{ item.nom }} - {{ item.type }} - {{ item.prix }}€ 
+    <button class="card-btn" (click)="addToCart(item)">
+        Ajouter au Caddie
+    </button>
+</p> 

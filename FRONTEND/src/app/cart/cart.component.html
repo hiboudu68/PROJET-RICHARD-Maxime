@@ -1,0 +1,15 @@
+<div class="list-cart">
+    <div *ngIf="cartProducts.length; else emptyCart">
+      <div *ngFor="let item of cartProducts">
+        <div>
+            {{ item.produit?.nom }} - {{ item.produit?.type }} - {{ item.produit?.prix }} €
+            <button (click)="removeFromCart(item)">
+              Supprimer
+            </button>
+        </div>
+      </div>
+    </div>
+    <ng-template #emptyCart>
+      <p>Votre panier est vide.</p>
+    </ng-template>
+</div>

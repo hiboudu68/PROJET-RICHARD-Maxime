@@ -1,0 +1,16 @@
+<header class="fixed-header">
+  <div class="content-header">
+    <button (click)="onClickSideBar()">
+      {{buttonMenu}}
+    </button>
+    <span>{{ title }}</span>
+    <div class="flex items-center">
+        <div class="flex">
+          panier
+          <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-darkPink rounded-full">
+            {{ nbInCart }}
+          </span>
+        </div>
+      </div>
+  </div>
+</header>

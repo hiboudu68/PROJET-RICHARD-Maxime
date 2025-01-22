@@ -1,0 +1,25 @@
+<form action="" method="get" class="compte" [formGroup]="formulaire">
+    <div class="compte">
+        <label for="name">Entrer le nom de la carte: </label>
+        <input id="name" type="text" name="name" formControlName="name">
+    </div>
+    <div class="compte">
+        <label for="code">Entrer le code: </label>
+        <input type="text" id="code" name="code" formControlName="code" placeholder="0000.0000.0000.0000" (keypress)="restrict_inputchar($event)"/>
+    </div>
+    <div class="compte">
+      <label for="ccv">Entrer le CCV: </label>
+      <input type="number" name="ccv" id="ccv" formControlName="ccv" />
+    </div>
+    <div class="compte">
+        <label for="date">Entrer le Mois/An d'expiration: </label>
+            <input type="text" name="date" id="date" formControlName="date" (keypress)="restrict_inputchar($event)" placeholder="mm/yy"/>
+    </div>
+    <div class="compte">
+      <input type="submit" (click)="valid()" value="Sauvegarde" />
+    </div>
+</form>
+
+<div style="color: red;">
+    <p>{{errorTxt}}</p>
+</div>

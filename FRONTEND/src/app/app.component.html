@@ -1,0 +1,8 @@
+<app-header (clickSideBar)="openSidebar()"></app-header>
+<main class="content-main">
+    <app-side-bar *ngIf="isSidebarDisplay" (closeSidebar)="closeSidebar()"></app-side-bar>
+    <div class="content">
+        <router-outlet/>
+    </div>
+</main>
+
