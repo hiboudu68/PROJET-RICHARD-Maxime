@@ -49,9 +49,9 @@ export class FormCardComponent {
     this.apiService.addCard({
       id: 0,
       name : this.formulaire.controls.name.value ? this.formulaire.controls.name.value : undefined,
-      code : this.formulaire.controls.code.value?.split('.'),
+      code : this.formulaire.controls.code.value ? this.formulaire.controls.code.value : undefined,
       ccv : this.formulaire.controls.ccv.value ? this.formulaire.controls.ccv.value : undefined,
-      date : this.formulaire.controls.date.value?.split('/'),
+      date : this.formulaire.controls.date.value ? this.formulaire.controls.date.value : undefined,
       idUser: 0
     }).subscribe(
       (res) => {

@@ -8,8 +8,8 @@
         CCV : {{ item.ccv }} <br>
         Date : {{ item.date }} <br>
         <button (click)="removeCard(item.id)" style="color: red;">X</button>
-        <button (click)="editCard(item)">Modifier</button>
-      </div>
+        <button (click)="editCard(item.id, item.name, item.code, item.ccv, item.date)">Modifier</button>  
+    </div>
   
       <!-- Mode édition -->
       <div *ngIf="editId === item.id" class="item-edit">

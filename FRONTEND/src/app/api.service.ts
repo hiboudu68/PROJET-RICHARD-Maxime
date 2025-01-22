@@ -116,16 +116,7 @@ export class ApiService {
         'Content-Type': 'application/x-www-form-urlencoded',
       }),
     };
-    let code
-    if (creditCard.code && creditCard.code.length) {
-      code = creditCard.code[0] + "." + creditCard.code[1] + "." + creditCard.code[2] + "." + creditCard.code[3]
-    }
-    let date
-    if(creditCard.date && creditCard.date.length) {
-      date = creditCard.date[0] + "/" + creditCard.date[1]
-      
-    }
-    data = 'name=' + creditCard.name + '&code=' + code + '&ccv=' + creditCard.ccv + '&date=' + date;
+    data = 'name=' + creditCard.name + '&code=' + creditCard.code + '&ccv=' + creditCard.ccv + '&date=' + creditCard.date;
     return this.http.post<Card>(  
       environment.backendCard,
       data,

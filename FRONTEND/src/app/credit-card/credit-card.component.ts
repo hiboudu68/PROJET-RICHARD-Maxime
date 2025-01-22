@@ -6,6 +6,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { FormCardComponent } from "../form-card/form-card.component";
 import { Produit } from '../models/Produit';
 import { ProduitInCart } from '../models/ProduitInCart';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-credit-card',
@@ -16,9 +17,14 @@ import { ProduitInCart } from '../models/ProduitInCart';
 })
 export class CreditCardComponent {
   cards: Card[] | undefined;
-  constructor(private apiservice: ApiService) {}
+  constructor(private apiservice: ApiService, private router: Router) {}
 
   ngOnInit(): void {
+    if (localStorage.getItem('token') === null) {
+      localStorage.setItem('errorMessage', 'Vous devez être connecté pour accéder à cette page');
+      this.router.navigate(['/login']);
+    }
+
     this.apiservice.getCards().subscribe(Items => {
       this.cards = Items;
     });
@@ -47,45 +53,34 @@ export class CreditCardComponent {
     dateUpdate : new FormControl('', Validators.required),
   })
   
-  editCard(card: Card | undefined) {
-    if(card){
-      this.editId = card.id;
-      let code = "";
-      card.code?.forEach(el => {
-        code += el;
-      })
-      let date = "";
-      card.date?.forEach(el => {
-        code += el;
-      })
-      this.update.patchValue({
-        nameUpdate: card.name,
-        codeUpdate: code,
-        ccvUpdate: card.ccv,
-        dateUpdate: date,
-      });
-    }
+  editCard(id: number = 0, name: string = "", code: string= "", ccv: number= 0, date: string= "") {
+    this.editId = id;
+    
+    this.update.patchValue({
+      nameUpdate: name,
+      codeUpdate: code,
+      ccvUpdate: ccv,
+      dateUpdate: date,
+    });
   }
 
-  saveEdit(id: number | undefined) {
+  async saveEdit(id: number | undefined) {
     if(id) {
-      this.apiservice.updateCard({
+      await this.apiservice.updateCard({
         id: id, 
         name : this.update.controls.nameUpdate.value ? this.update.controls.nameUpdate.value : undefined,
-        code : this.update.controls.codeUpdate.value?.split('.'),
+        code : this.update.controls.codeUpdate.value ? this.update.controls.codeUpdate.value : undefined,
         ccv : this.update.controls.ccvUpdate.value ? this.update.controls.ccvUpdate.value : undefined,
-        date : this.update.controls.dateUpdate.value?.split('/'),
+        date : this.update.controls.dateUpdate.value ? this.update.controls.dateUpdate.value : undefined,
         idUser: 0
       }).subscribe(
         (res) => {
-          if (this.cards){
-            this.cards = this.cards.filter((cards) => cards.id !== id);
-          }
         },
         (err) => {
-          console.error(err);
+          console.error(err)
         }
       )
+      window.location.reload()
     }
     this.editId = undefined;
   }

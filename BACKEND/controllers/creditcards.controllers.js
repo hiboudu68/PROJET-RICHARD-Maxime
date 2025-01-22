@@ -67,11 +67,8 @@ exports.deleteCard = (req, res) => {
         }
     })
 
-    console.log(req.params)
-
     CreditCards.destroy({
         where: {id: req.params.id},
-        //truncate: true,
     })
     .then(card => {
         res.status(201).json({ message: 'Carte supprimer avec succès.', card });
@@ -83,33 +80,28 @@ exports.deleteCard = (req, res) => {
 };
 
 exports.updateCard = async (req, res) => {
-    console.log("cards")
-    if (!cards && cards.length) {
-        return res.status(404).json({ message: 'Carte de crédit inexistante' });
-    }
-
-    console.log(cards)
+    let user = await decodedAccessToken(req, res);
+    console.log(req.body)
+    console.log(user)
 
     CreditCards.update(
         { name: req.body.name,
           code: req.body.code,
           ccv: req.body.ccv,
           date: req.body.date,
-          idUser: req.body.idUser},
-        { where: {idUser: user.dataValues.id}}
+          idUser: user.id},
+        { where: {id: req.body.id}}
       ).then(([rowsUpdated]) => {
         if (rowsUpdated === 0) {
           res.status(500).json({ message:'No carte found with the specified ID.'});
         }
         else {
-          res.status(200);
+          return res.status(200);
         }
       })
       .catch(error => {
         res.status(500).json({ message: 'Error updating carte.' });
       });
-  
-    res.json(cards);
 };
 
 
